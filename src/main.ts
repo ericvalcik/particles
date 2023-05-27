@@ -9,7 +9,8 @@ const p5Instance = new p5(s => {
 
   let imgUrl = '/red-star-final.png';
   let img;
-  let particles = [];
+  let particles: Particle[] = [];
+  let gravity = false;
 
   s.preload = () => {
     img = s.loadImage(imgUrl);
@@ -23,7 +24,7 @@ const p5Instance = new p5(s => {
     cnv.style("inset", 0);
     cnv.style("margin", "auto");
     cnv.style("z-index", -1);
-    s.spawnParticles();
+    spawnParticles();
   }
 
   s.draw = () => {
@@ -35,7 +36,7 @@ const p5Instance = new p5(s => {
     });
   }
 
-  s.spawnParticles = () => {
+  const spawnParticles = () => {
     for (let i = 0; i < s.width; i += RESOLUTION) {
       for (let j = 0; j < s.height; j += RESOLUTION) {
         let x = (i / s.width) * img.width;
@@ -50,11 +51,11 @@ const p5Instance = new p5(s => {
   }
 
   class Particle {
-    private readonly targetX: any;
-    private readonly targetY: any;
-    private readonly color: any;
-    private y: any;
-    private x: any;
+    private readonly targetX: number;
+    private readonly targetY: number;
+    private readonly color: number[];
+    private y: number;
+    private x: number;
     constructor(x, y, color) {
       this.x = x;
       this.y = y;
@@ -110,9 +111,13 @@ const p5Instance = new p5(s => {
   //   const size = Math.min(s.windowWidth, s.windowHeight) * 0.8;
   //   s.resizeCanvas(size, size)
   //   particles = [];
-  //   s.spawnParticles();
+  //   spawnParticles();
   //   s.draw();
   // }
+
+  s.doubleClicked = () => {
+    gravity = !gravity;
+  }
 });
 
 export default p5Instance;
