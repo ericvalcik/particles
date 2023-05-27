@@ -1,4 +1,4 @@
-import * as p5 from './p5.min';
+import p5 from 'p5';
 
 const PARTICLE_SIZE = 7;
 const RESOLUTION = 7;
@@ -106,5 +106,3 @@ function windowResized() {
   spawnParticles();
   draw();
 }
-
-export * as main from './main.js';

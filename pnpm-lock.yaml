@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+dependencies:
+  p5:
+    specifier: ^1.6.0
+    version: 1.6.0
+
 devDependencies:
   '@parcel/config-default':
     specifier: ^2.9.1
@@ -1662,6 +1667,10 @@ packages:
   /ordered-binary@1.4.0:
     resolution: {integrity: sha512-EHQ/jk4/a9hLupIKxTfUsQRej1Yd/0QLQs3vGvIqg5ZtCYSzNhkzHoZc7Zf4e4kUlDaC3Uw8Q/1opOLNN2OKRQ==}
     dev: true
+
+  /p5@1.6.0:
+    resolution: {integrity: sha512-RowF+RxfVUhJm/YKXL5TCFzTqnwAIwK6W1VGs9LAqSf3PCmLz9Igbxzlf0Ry5IMV71L42wipCdH/bDiNsqAstA==}
+    dev: false
 
   /parcel-reporter-static-files-copy@1.5.0(@parcel/core@2.9.1):
     resolution: {integrity: sha512-dsY3MQkbYSgEqS0/22vtD2mZtel8UC0ItH0ok8LmgFeCMTsdhyOtJgvt945ODIzu9lYc/sCIzksM8C77uSE3Fg==}

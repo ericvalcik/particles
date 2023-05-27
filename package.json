@@ -16,5 +16,8 @@
     "parcel": "^2.9.1",
     "parcel-reporter-static-files-copy": "^1.5.0",
     "sharp": "^0.31.1"
+  },
+  "dependencies": {
+    "p5": "^1.6.0"
   }
 }
