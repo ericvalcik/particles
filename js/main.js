@@ -4,7 +4,7 @@ const MAX_FORCE = 10;
 const MIN_FORCE = 0;
 const EFFECT_DISTANCE = 50;
 
-let imgUrl = '/../img/red-star-final.png';
+let imgUrl = '/red-star-final.png';
 let img;
 let particles = [];
 
@@ -25,7 +25,7 @@ function setup() {
 
 function draw() {
   background(255);
-  //image(img, 0, 0, width, height);
+  //image(static, 0, 0, width, height);
   particles.forEach((particle) => {
     particle.update();
     particle.draw();

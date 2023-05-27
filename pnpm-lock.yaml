@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 devDependencies:
+  '@parcel/config-default':
+    specifier: ^2.9.1
+    version: 2.9.1(@parcel/core@2.9.1)
   '@parcel/packager-raw-url':
     specifier: 2.9.1
     version: 2.9.1(@parcel/core@2.9.1)
@@ -10,6 +13,9 @@ devDependencies:
   parcel:
     specifier: ^2.9.1
     version: 2.9.1
+  parcel-reporter-static-files-copy:
+    specifier: ^1.5.0
+    version: 1.5.0(@parcel/core@2.9.1)
   sharp:
     specifier: ^0.31.1
     version: 0.31.3
@@ -1655,6 +1661,15 @@ packages:
 
   /ordered-binary@1.4.0:
     resolution: {integrity: sha512-EHQ/jk4/a9hLupIKxTfUsQRej1Yd/0QLQs3vGvIqg5ZtCYSzNhkzHoZc7Zf4e4kUlDaC3Uw8Q/1opOLNN2OKRQ==}
+    dev: true
+
+  /parcel-reporter-static-files-copy@1.5.0(@parcel/core@2.9.1):
+    resolution: {integrity: sha512-dsY3MQkbYSgEqS0/22vtD2mZtel8UC0ItH0ok8LmgFeCMTsdhyOtJgvt945ODIzu9lYc/sCIzksM8C77uSE3Fg==}
+    engines: {parcel: ^2.0.0-beta.1}
+    dependencies:
+      '@parcel/plugin': 2.9.1(@parcel/core@2.9.1)
+    transitivePeerDependencies:
+      - '@parcel/core'
     dev: true
 
   /parcel@2.9.1:
