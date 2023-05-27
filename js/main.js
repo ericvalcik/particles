@@ -1,3 +1,5 @@
+import * as p5 from './p5.min';
+
 const PARTICLE_SIZE = 7;
 const RESOLUTION = 7;
 const MAX_FORCE = 10;
