@@ -50,6 +50,11 @@ const p5Instance = new p5(s => {
   }
 
   class Particle {
+    private readonly targetX: any;
+    private readonly targetY: any;
+    private readonly color: any;
+    private y: any;
+    private x: any;
     constructor(x, y, color) {
       this.x = x;
       this.y = y;

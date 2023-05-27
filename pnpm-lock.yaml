@@ -15,6 +15,9 @@ devDependencies:
   '@parcel/transformer-webmanifest':
     specifier: 2.9.1
     version: 2.9.1(@parcel/core@2.9.1)
+  '@types/p5':
+    specifier: ^1.6.2
+    version: 1.6.2
   parcel:
     specifier: ^2.9.1
     version: 2.9.1
@@ -992,6 +995,10 @@ packages:
   /@trysound/sax@0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /@types/p5@1.6.2:
+    resolution: {integrity: sha512-iy1B7DBMc9e5j0DrWnIjSJh+Ro9UkKxPHspbx/GvIeGFTOIJF0H2lICnIN4go1OZEAQSHBinLd7t+oe8lrrLvA==}
     dev: true
 
   /abortcontroller-polyfill@1.7.5:
