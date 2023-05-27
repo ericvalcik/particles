@@ -1,5 +1,5 @@
-const PARTICLE_SIZE = 10;
-const RESOLUTION = 10;
+const PARTICLE_SIZE = 7;
+const RESOLUTION = 7;
 const MAX_FORCE = 10;
 const MIN_FORCE = 0;
 const EFFECT_DISTANCE = 50;
@@ -13,10 +13,12 @@ function preload() {
 }
 
 function setup() {
-  let cnv = createCanvas(windowWidth, windowHeight);
+  const size = Math.min(windowWidth, windowHeight) * 0.8;
+  let cnv = createCanvas(size, size);
   cnv.style("display", "block");
   cnv.style("position", "absolute");
   cnv.style("inset", 0);
+  cnv.style("margin", "auto");
   cnv.style("z-index", -1);
   spawnParticles();
 }
@@ -36,7 +38,7 @@ function spawnParticles() {
       let x = (i / width) * img.width;
       let y = (j / height) * img.height;
       const color = img.get(x, y);
-      if (alpha(color) === 0) continue;
+      if (color[0] + color[1] + color[2] > 255 * 3 - 50) continue;
       particles.push(
         new Particle(i + PARTICLE_SIZE / 2, j + PARTICLE_SIZE / 2, color)
       );
