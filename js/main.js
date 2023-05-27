@@ -22,7 +22,7 @@ p5.setup = () => {
   cnv.style("inset", 0);
   cnv.style("margin", "auto");
   cnv.style("z-index", -1);
-  spawnParticles();
+  p5.spawnParticles();
 }
 
 p5.draw = () => {
@@ -100,7 +100,7 @@ class Particle {
   }
 }
 
-function windowResized() {
+p5.windowResized = () => {
   p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
   particles = [];
   p5.spawnParticles();
