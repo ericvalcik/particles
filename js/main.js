@@ -65,11 +65,11 @@ const p5Instance = new p5(s => {
       let targetVector = s.createVector(this.targetX, this.targetY);
 
       // calculate vector from mouse to particle and its magnitude (distance)
-      let fromMouseToParticle = s.Vector.sub(currentVector, mouseVector);
+      let fromMouseToParticle = p5.Vector.sub(currentVector, mouseVector);
       let distanceToMouse = fromMouseToParticle.mag();
 
       // calculate vector from particle to target and its magnitude
-      let fromParticleToTarget = s.Vector.sub(targetVector, currentVector);
+      let fromParticleToTarget = p5.Vector.sub(targetVector, currentVector);
       let distanceToTarget = fromParticleToTarget.mag();
 
       let totalForce = s.createVector(0, 0);
