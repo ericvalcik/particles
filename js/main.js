@@ -102,7 +102,8 @@ const p5Instance = new p5(s => {
   }
 
   s.windowResized = () => {
-    s.resizeCanvas(s.windowWidth, s.windowHeight)
+    const size = Math.min(s.windowWidth, s.windowHeight) * 0.8;
+    s.resizeCanvas(size, size)
     particles = [];
     s.spawnParticles();
     s.draw();
