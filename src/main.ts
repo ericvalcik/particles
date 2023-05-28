@@ -10,15 +10,14 @@ const p5Instance = new p5(s => {
   let imgUrl = '/red-star-final.png';
   let img;
   let particles: Particle[] = [];
-  let gravity = false;
+  let doubleClicked = false;
 
   s.preload = () => {
     img = s.loadImage(imgUrl);
   }
 
   s.setup = () => {
-    const size = Math.min(s.windowWidth, s.windowHeight) * 0.8;
-    let cnv = s.createCanvas(size, size);
+    let cnv = s.createCanvas(s.windowWidth, s.windowHeight);
     cnv.style("display", "block");
     cnv.style("position", "absolute");
     cnv.style("inset", 0);
@@ -56,12 +55,16 @@ const p5Instance = new p5(s => {
     private readonly color: number[];
     private y: number;
     private x: number;
+    public velX: number;
+    public velY: number;
     constructor(x, y, color) {
       this.x = x;
       this.y = y;
       this.color = color;
       this.targetX = x;
       this.targetY = y;
+      this.velX = 0;
+      this.velY = 0;
     }
 
     update() {
@@ -80,24 +83,54 @@ const p5Instance = new p5(s => {
 
       let totalForce = s.createVector(0, 0);
 
-      // if mouse is within 100 pixels, calculate a repulsive force
-
+      // if mouse is within EFFECT_DISTANCE, calculate a repulsive force
       if (distanceToMouse < EFFECT_DISTANCE) {
         let repulsionForce = s.map(distanceToMouse, 0, EFFECT_DISTANCE, MAX_FORCE, MIN_FORCE);
         fromMouseToParticle.setMag(repulsionForce);
         totalForce.add(fromMouseToParticle);
       }
 
-      // if particle is not at tartget, calculate an attractive force
-      if (distanceToMouse > 0) {
+      // if particle is not at target, calculate an attractive force
+      if (distanceToMouse > 0 && !doubleClicked) {
+        this.velX = 0;
+        this.velY = 0;
         let attractionForce = s.map(distanceToTarget, 0, EFFECT_DISTANCE, MIN_FORCE, MAX_FORCE);
         fromParticleToTarget.setMag(attractionForce);
         totalForce.add(fromParticleToTarget);
       }
 
-      // add the forces to the position
-      this.x += totalForce.x;
-      this.y += totalForce.y;
+      // diminish velocity
+      this.velX *= 0.9;
+      this.velY *= 0.9;
+
+      // add the forces to the velocity
+      this.velX += totalForce.x;
+      this.velY += totalForce.y;
+
+      // add velocity to position
+      this.x += this.velX;
+      this.y += this.velY;
+
+      // bounce off bottom edge
+      if (this.y > s.height - PARTICLE_SIZE / 2) {
+        this.y = s.height - PARTICLE_SIZE / 2;
+        this.velY *= -1;
+      }
+      // bounce off top edge
+      if (this.y < PARTICLE_SIZE / 2) {
+        this.y = PARTICLE_SIZE / 2;
+        this.velY *= -1;
+      }
+      // bounce off right edge
+      if (this.x > s.width - PARTICLE_SIZE / 2) {
+        this.x = s.width - PARTICLE_SIZE / 2;
+        this.velX *= -1;
+      }
+      // bounce off left edge
+      if (this.x < PARTICLE_SIZE / 2) {
+        this.x = PARTICLE_SIZE / 2;
+        this.velX *= -1;
+      }
     }
 
     draw() {
@@ -116,7 +149,7 @@ const p5Instance = new p5(s => {
   // }
 
   s.doubleClicked = () => {
-    gravity = !gravity;
+    doubleClicked = !doubleClicked;
   }
 });
 
