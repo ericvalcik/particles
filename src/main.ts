@@ -36,10 +36,12 @@ const p5Instance = new p5(s => {
   }
 
   const spawnParticles = () => {
-    for (let i = 0; i < s.width; i += RESOLUTION) {
-      for (let j = 0; j < s.height; j += RESOLUTION) {
-        let x = (i / s.width) * img.width;
-        let y = (j / s.height) * img.height;
+    const widthAdjust = Math.max(0, s.width - s.height) / 2;
+    const heightAdjust = Math.max(0, s.height - s.width) / 2;
+    for (let i = widthAdjust; i < s.width - widthAdjust; i += RESOLUTION) {
+      for (let j = heightAdjust; j < s.height - heightAdjust; j += RESOLUTION) {
+        let x = ((i - widthAdjust) / (s.width - 2 * widthAdjust)) * img.width;
+        let y = ((j - heightAdjust) / (s.height - 2 * heightAdjust)) * img.height;
         const color = img.get(x, y);
         if (color[0] + color[1] + color[2] > 255 * 3 - 50) continue;
         particles.push(
