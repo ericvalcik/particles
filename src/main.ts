@@ -1,8 +1,8 @@
 import p5 from 'p5';
 
 const p5Instance = new p5(s => {
-  const PARTICLE_SIZE = 7;
-  const RESOLUTION = 7;
+  const PARTICLE_SIZE = 12;
+  const RESOLUTION = 12;
   const MAX_FORCE = 10;
   const MIN_FORCE = 0;
   const EFFECT_DISTANCE = 50;
@@ -33,6 +33,7 @@ const p5Instance = new p5(s => {
       particle.update();
       particle.draw();
     });
+    console.log(s.frameCount)
   }
 
   const spawnParticles = () => {
@@ -149,6 +150,10 @@ const p5Instance = new p5(s => {
   //   spawnParticles();
   //   s.draw();
   // }
+  setTimeout(() => {
+    doubleClicked = true;
+  }, 3000);
+
 
   s.doubleClicked = () => {
     doubleClicked = !doubleClicked;
