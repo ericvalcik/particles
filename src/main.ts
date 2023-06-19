@@ -7,7 +7,7 @@ const p5Instance = new p5(s => {
   const MIN_FORCE = 0;
   const EFFECT_DISTANCE = 50;
 
-  let imgUrl = '/blurred-a.png';
+  let imgUrl = '/blurred-a.jpg';
   let img;
   let particles: Particle[] = [];
   let doubleClicked = false;
@@ -33,7 +33,6 @@ const p5Instance = new p5(s => {
       particle.update();
       particle.draw();
     });
-    console.log(s.frameCount)
   }
 
   const spawnParticles = () => {
