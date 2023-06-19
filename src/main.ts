@@ -7,7 +7,7 @@ const p5Instance = new p5(s => {
   const MIN_FORCE = 0;
   const EFFECT_DISTANCE = 50;
 
-  let imgUrl = '/red-star-final.png';
+  let imgUrl = '/blurred-a.png';
   let img;
   let particles: Particle[] = [];
   let doubleClicked = false;
