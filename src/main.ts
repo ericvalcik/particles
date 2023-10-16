@@ -17,7 +17,20 @@ const p5Instance = new p5((s) => {
   const nullScore = () => {
     score = 0;
     isTouchingWall = true;
-    document.getElementById("score").innerHTML = `Score: ${score.toString()}`;
+    updateScore();
+  };
+
+  const updateScore = () => {
+    let scoreSeconds = Math.floor(score / 1000);
+    document.getElementById(
+      "score",
+    ).innerHTML = `Score: ${scoreSeconds.toString()}`;
+    if (scoreSeconds > +localStorage.getItem("highScore")) {
+      localStorage.setItem("highScore", scoreSeconds.toString());
+    }
+    document.getElementById(
+      "high-score",
+    ).innerHTML = `High Score: ${localStorage.getItem("highScore")}`;
   };
 
   s.preload = () => {
@@ -32,6 +45,7 @@ const p5Instance = new p5((s) => {
     cnv.style("margin", "auto");
     cnv.style("z-index", -1);
     spawnParticles();
+    s.frameRate(60);
   };
 
   s.draw = () => {
@@ -41,6 +55,10 @@ const p5Instance = new p5((s) => {
       particle.update();
       particle.draw();
     });
+    if (!isTouchingWall && s.deltaTime < 100) {
+      score += Math.floor(s.deltaTime);
+    }
+    updateScore();
   };
 
   const spawnParticles = () => {
@@ -169,13 +187,6 @@ const p5Instance = new p5((s) => {
   // setTimeout(() => {
   //   doubleClicked = true;
   // }, 3000);
-
-  setInterval(() => {
-    if (!isTouchingWall) {
-      score++;
-    }
-    document.getElementById("score").innerHTML = `Score: ${score.toString()}`;
-  }, 1000);
 
   // s.doubleClicked = () => {
   //   doubleClicked = !doubleClicked;
