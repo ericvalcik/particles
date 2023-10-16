@@ -1,20 +1,20 @@
-import p5 from 'p5';
+import p5 from "p5";
 
-const p5Instance = new p5(s => {
-  const PARTICLE_SIZE = 12;
-  const RESOLUTION = 12;
+const p5Instance = new p5((s) => {
+  const PARTICLE_SIZE = 25;
+  const RESOLUTION = 25; // was 12
   const MAX_FORCE = 10;
   const MIN_FORCE = 0;
   const EFFECT_DISTANCE = 50;
 
-  let imgUrl = '/blurred-a.jpg';
+  let imgUrl = "/blurred-a.jpg";
   let img;
   let particles: Particle[] = [];
   let doubleClicked = false;
 
   s.preload = () => {
     img = s.loadImage(imgUrl);
-  }
+  };
 
   s.setup = () => {
     let cnv = s.createCanvas(s.windowWidth, s.windowHeight);
@@ -24,7 +24,7 @@ const p5Instance = new p5(s => {
     cnv.style("margin", "auto");
     cnv.style("z-index", -1);
     spawnParticles();
-  }
+  };
 
   s.draw = () => {
     s.background(255);
@@ -33,23 +33,11 @@ const p5Instance = new p5(s => {
       particle.update();
       particle.draw();
     });
-  }
+  };
 
   const spawnParticles = () => {
-    const widthAdjust = Math.max(0, s.width - s.height) / 2;
-    const heightAdjust = Math.max(0, s.height - s.width) / 2;
-    for (let i = widthAdjust; i < s.width - widthAdjust; i += RESOLUTION) {
-      for (let j = heightAdjust; j < s.height - heightAdjust; j += RESOLUTION) {
-        let x = ((i - widthAdjust) / (s.width - 2 * widthAdjust)) * img.width;
-        let y = ((j - heightAdjust) / (s.height - 2 * heightAdjust)) * img.height;
-        const color = img.get(x, y);
-        if (color[0] + color[1] + color[2] > 255 * 3 - 50) continue;
-        particles.push(
-          new Particle(i + PARTICLE_SIZE / 2, j + PARTICLE_SIZE / 2, color)
-        );
-      }
-    }
-  }
+    particles.push(new Particle(s.width / 2, s.height / 2, [0, 0, 0]));
+  };
 
   class Particle {
     private readonly targetX: number;
@@ -87,7 +75,13 @@ const p5Instance = new p5(s => {
 
       // if mouse is within EFFECT_DISTANCE, calculate a repulsive force
       if (distanceToMouse < EFFECT_DISTANCE) {
-        let repulsionForce = s.map(distanceToMouse, 0, EFFECT_DISTANCE, MAX_FORCE, MIN_FORCE);
+        let repulsionForce = s.map(
+          distanceToMouse,
+          0,
+          EFFECT_DISTANCE,
+          MAX_FORCE,
+          MIN_FORCE,
+        );
         fromMouseToParticle.setMag(repulsionForce);
         totalForce.add(fromMouseToParticle);
       }
@@ -96,7 +90,13 @@ const p5Instance = new p5(s => {
       if (distanceToMouse > 0 && !doubleClicked) {
         this.velX = 0;
         this.velY = 0;
-        let attractionForce = s.map(distanceToTarget, 0, EFFECT_DISTANCE, MIN_FORCE, MAX_FORCE);
+        let attractionForce = s.map(
+          distanceToTarget,
+          0,
+          EFFECT_DISTANCE,
+          MIN_FORCE,
+          MAX_FORCE,
+        );
         fromParticleToTarget.setMag(attractionForce);
         totalForce.add(fromParticleToTarget);
       }
@@ -153,10 +153,9 @@ const p5Instance = new p5(s => {
     doubleClicked = true;
   }, 3000);
 
-
   s.doubleClicked = () => {
     doubleClicked = !doubleClicked;
-  }
+  };
 });
 
 export default p5Instance;
