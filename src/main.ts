@@ -10,7 +10,15 @@ const p5Instance = new p5((s) => {
   let imgUrl = "/blurred-a.jpg";
   let img;
   let particles: Particle[] = [];
-  let doubleClicked = false;
+  let doubleClicked = true;
+  let score = 0;
+  let isTouchingWall = false;
+
+  const nullScore = () => {
+    score = 0;
+    isTouchingWall = true;
+    document.getElementById("score").innerHTML = `Score: ${score.toString()}`;
+  };
 
   s.preload = () => {
     img = s.loadImage(imgUrl);
@@ -116,25 +124,31 @@ const p5Instance = new p5((s) => {
       this.x += this.velX;
       this.y += this.velY;
 
+      isTouchingWall = false;
+
       // bounce off bottom edge
       if (this.y > s.height - PARTICLE_SIZE / 2) {
         this.y = s.height - PARTICLE_SIZE / 2;
         this.velY *= -1;
+        nullScore();
       }
       // bounce off top edge
       if (this.y < PARTICLE_SIZE / 2) {
         this.y = PARTICLE_SIZE / 2;
         this.velY *= -1;
+        nullScore();
       }
       // bounce off right edge
       if (this.x > s.width - PARTICLE_SIZE / 2) {
         this.x = s.width - PARTICLE_SIZE / 2;
         this.velX *= -1;
+        nullScore();
       }
       // bounce off left edge
       if (this.x < PARTICLE_SIZE / 2) {
         this.x = PARTICLE_SIZE / 2;
         this.velX *= -1;
+        nullScore();
       }
     }
 
@@ -152,13 +166,20 @@ const p5Instance = new p5((s) => {
   //   spawnParticles();
   //   s.draw();
   // }
-  setTimeout(() => {
-    doubleClicked = true;
-  }, 3000);
+  // setTimeout(() => {
+  //   doubleClicked = true;
+  // }, 3000);
 
-  s.doubleClicked = () => {
-    doubleClicked = !doubleClicked;
-  };
+  setInterval(() => {
+    if (!isTouchingWall) {
+      score++;
+    }
+    document.getElementById("score").innerHTML = `Score: ${score.toString()}`;
+  }, 1000);
+
+  // s.doubleClicked = () => {
+  //   doubleClicked = !doubleClicked;
+  // };
 });
 
 export default p5Instance;
