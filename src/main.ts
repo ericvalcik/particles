@@ -86,7 +86,7 @@ const p5Instance = new p5((s) => {
         totalForce.add(fromMouseToParticle);
       }
 
-      // if particle is not at target, calculate an attractive force
+      // if particle is not at target + binding to target is enabled (doubleClicked), calculate an attractive force
       if (distanceToMouse > 0 && !doubleClicked) {
         this.velX = 0;
         this.velY = 0;
@@ -101,9 +101,12 @@ const p5Instance = new p5((s) => {
         totalForce.add(fromParticleToTarget);
       }
 
+      // add gravity
+      totalForce.add(s.createVector(0, 0.4));
+
       // diminish velocity
-      this.velX *= 0.9;
-      this.velY *= 0.9;
+      this.velX *= 0.99;
+      this.velY *= 0.99;
 
       // add the forces to the velocity
       this.velX += totalForce.x;
